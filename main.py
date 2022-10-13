@@ -1,10 +1,9 @@
-# Получение данных от пользователя
 while True:
-    print("Введите 'y' для добавления данных, и 'n' для завершения")
+    print("Введите '+' для добавления данных, и '-' для выхода из программы")
     cheak: str = input()
-    if cheak in ["y"]:
+    if cheak in ["+"]:
         try:
-            print('Введите ФИО и год рождения:')
+            print('Введите ФИО и год рождения через пробел:')
             Surname, Name, Patronymic, Year = map(str, input().split())
             print(f"Вы ввели: {Surname} {Name} {Patronymic} {Year}")
             assert Year.isdigit()
@@ -12,14 +11,18 @@ while True:
             print('Не правильно внесены данные!')
         except:
             print('Ошибка!')
-        # Запись данных в файл
         try:
-            my_file = open("DataPeople.txt", "a", encoding='utf8')
-            my_file.write(f"{Surname} {Name} {Patronymic} {Year}\n")
-            my_file.close()
+            File = open("Data.txt", "a", encoding='utf8')
+            File.write(f"{Surname} {Name} {Patronymic} {Year}\n")
+            File.close()
         except PermissionError:
-            print('У вас нет доступа к данному файлу!')
+            print('Нет доступа')
         except:
             print('Ошибка!')
     else:
-        exit()
+        if cheak in ['-']:
+            print("Запись в файл завершена")
+            exit()
+        else:
+            print("Ошибка")
+            exit()
